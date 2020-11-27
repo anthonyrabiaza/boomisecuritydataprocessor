@@ -1,0 +1,139 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<GenericConnectorDescriptor>
+    <description>Boomi Data Security Processor</description>
+
+    <field id="privateKey" label="Private Key" type="privatecertificate">
+        <helpText>X.509 Certificate (pfx, p12)</helpText>
+    </field>
+
+    <field id="publicKey" label="Public Key" type="publiccertificate">
+        <helpText>X.509 Certificate (cer, crt)</helpText>
+    </field>
+
+    <field id="logging" label="Logging" type="boolean">
+        <helpText>Enable logging in the Processors</helpText>
+        <defaultValue>true</defaultValue>
+    </field>
+
+    <operation types="EXECUTE" inputType="binary"
+               outputType="binary">
+
+        <field type="string" id="action" label="Action">
+            <defaultValue>sign</defaultValue>
+            <allowedValue label="Sign">
+                <value>sign</value>
+            </allowedValue>
+            <allowedValue label="Validate Signature">
+                <value>validateSignature</value>
+            </allowedValue>
+            <allowedValue label="Encrypt">
+                <value>encrypt</value>
+            </allowedValue>
+            <allowedValue label="Decrypt">
+                <value>decrypt</value>
+            </allowedValue>
+        </field>
+
+        <field type="string" id="standard" label="Standard">
+            <defaultValue>x509</defaultValue>
+            <allowedValue label="X.509 Standard">
+                <value>x509</value>
+            </allowedValue>
+            <allowedValue label="Javascript Object Signing and Encryption (JWS and JWE)">
+                <value>jose</value>
+            </allowedValue>
+        </field>
+
+        <field type="string" id="keyAlias" label="Key Alias">
+            <helpText>Key Alias from the Private Key, you can use publickey_0 for Public Key</helpText>
+            <defaultValue>1</defaultValue>
+        </field>
+
+        <field type="string" id="signingAlgorithm" label="Algorithm for signing/validating signature">
+            <helpText>Use for Sign and Validate Signature actions. For X.509 Standard, please select the algorithm starting with X.509. For Javascript Object Signing, please select the one starting with JWS.</helpText>
+            <defaultValue>SHA256withRSA</defaultValue>
+
+            <allowedValue label="Not used"><value>NONE</value></allowedValue>
+
+            <allowedValue label="X.509 SHA1withDSA"><value>SHA1withDSA</value></allowedValue>
+            <allowedValue label="X.509 SHA1withRSA"><value>SHA1withRSA</value></allowedValue>
+            <allowedValue label="X.509 SHA256withRSA"><value>SHA256withRSA</value></allowedValue>
+
+            <allowedValue label="JWS HS256"><value>HS256</value></allowedValue>
+            <allowedValue label="JWS HS384"><value>HS384</value></allowedValue>
+            <allowedValue label="JWS HS512"><value>HS512</value></allowedValue>
+            <allowedValue label="JWS RS256"><value>RS256</value></allowedValue>
+            <allowedValue label="JWS RS384"><value>RS384</value></allowedValue>
+            <allowedValue label="JWS RS512"><value>RS512</value></allowedValue>
+            <allowedValue label="JWS ES256"><value>ES256</value></allowedValue>
+            <allowedValue label="JWS ES384"><value>ES384</value></allowedValue>
+            <allowedValue label="JWS ES512"><value>ES512</value></allowedValue>
+            <!--
+            <allowedValue label="JWS PS256"><value>PS256</value></allowedValue>
+            <allowedValue label="JWS PS384"><value>PS384</value></allowedValue>
+            <allowedValue label="JWS PS512"><value>PS512</value></allowedValue>
+            -->
+        </field>
+
+        <field type="string" id="encryptingAlgorithm" label="Algorithm for encryption/decryption">
+            <helpText>Use for Encrypt and Decrypt actions. For X.509 Standard, please select the algorithm starting with X.509. For Javascript Object Encryption, please select the one starting with JWE.</helpText>
+            <defaultValue>RSA/ECB/PKCS1Padding</defaultValue>
+
+            <allowedValue label="Not used"><value>NONE</value></allowedValue>
+
+            <allowedValue label="X.509 AES/CBC/NoPadding"><value>AES/CBC/NoPadding</value></allowedValue>
+            <allowedValue label="X.509 AES/CBC/PKCS5Padding"><value>AES/CBC/PKCS5Padding</value></allowedValue>
+            <allowedValue label="X.509 AES/ECB/NoPadding"><value>AES/ECB/NoPadding</value></allowedValue>
+            <allowedValue label="X.509 AES/ECB/PKCS5Padding"><value>AES/ECB/PKCS5Padding</value></allowedValue>
+            <allowedValue label="X.509 DES/CBC/NoPadding"><value>DES/CBC/NoPadding</value></allowedValue>
+            <allowedValue label="X.509 DES/CBC/PKCS5Padding"><value>DES/CBC/PKCS5Padding</value></allowedValue>
+            <allowedValue label="X.509 DES/ECB/NoPadding"><value>DES/ECB/NoPadding</value></allowedValue>
+            <allowedValue label="X.509 DES/ECB/PKCS5Padding"><value>DES/ECB/PKCS5Padding</value></allowedValue>
+            <allowedValue label="X.509 DESede/CBC/NoPadding"><value>DESede/CBC/NoPadding</value></allowedValue>
+            <allowedValue label="X.509 DESede/CBC/PKCS5Padding"><value>DESede/CBC/PKCS5Padding</value></allowedValue>
+            <allowedValue label="X.509 DESede/ECB/NoPadding"><value>DESede/ECB/NoPadding</value></allowedValue>
+            <allowedValue label="X.509 DESede/ECB/PKCS5Padding"><value>DESede/ECB/PKCS5Padding</value></allowedValue>
+            <allowedValue label="X.509 RSA/ECB/PKCS1Padding"><value>RSA/ECB/PKCS1Padding</value></allowedValue>
+            <allowedValue label="X.509 RSA/ECB/OAEPWithSHA-1AndMGF1Padding"><value>RSA/ECB/OAEPWithSHA-1AndMGF1Padding</value></allowedValue>
+            <allowedValue label="X.509 RSA/ECB/OAEPWithSHA-256AndMGF1Padding"><value>RSA/ECB/OAEPWithSHA-256AndMGF1Padding</value></allowedValue>
+
+            <!-- enc -->
+            <allowedValue label="JWE A128CBC-HS256"><value>A128CBC-HS256</value></allowedValue>
+            <allowedValue label="JWE A192CBC-HS384"><value>A192CBC-HS384</value></allowedValue>
+            <allowedValue label="JWE A256CBC-HS512"><value>A256CBC-HS512</value></allowedValue>
+            <allowedValue label="JWE A128GCM"><value>A128GCM</value></allowedValue>
+            <allowedValue label="JWE A192GCM"><value>A192GCM</value></allowedValue>
+            <allowedValue label="JWE A256GCM"><value>A256GCM</value></allowedValue>
+        </field>
+
+        <!-- alg -->
+        <field type="string" id="encryptingAlgorithmHeader" label="Algorithm Header for JWE encryption/decryption">
+            <helpText>Use for Encrypt and Decrypt actions with JWE. dir will be used with the Secret document Property</helpText>
+            <defaultValue>RSA/ECB/PKCS1Padding</defaultValue>
+
+            <allowedValue label="Not used"><value>NONE</value></allowedValue>
+
+            <allowedValue label="JWE dir (Symetric key)"><value>dir</value></allowedValue>
+            <allowedValue label="JWE A128KW"><value>A128KW</value></allowedValue>
+            <allowedValue label="JWE A192KW"><value>A192KW</value></allowedValue>
+            <allowedValue label="JWE A256KW"><value>A256KW</value></allowedValue>
+            <allowedValue label="JWE A128GCMKW"><value>A128GCMKW</value></allowedValue>
+            <allowedValue label="JWE A192GCMKW"><value>A192GCMKW</value></allowedValue>
+            <allowedValue label="JWE A256GCMKW"><value>A256GCMKW</value></allowedValue>
+            <allowedValue label="JWE ECDH-ES"><value>ECDH-ES</value></allowedValue>
+            <allowedValue label="JWE ECDH-ES+A128KW"><value>ECDH-ES+A128KW</value></allowedValue>
+            <allowedValue label="JWE ECDH-ES+A192KW"><value>ECDH-ES+A192KW</value></allowedValue>
+            <allowedValue label="JWE ECDH-ES+A256KW"><value>ECDH-ES+A256KW</value></allowedValue>
+            <allowedValue label="JWE PBES2-HS256+A128KW"><value>PBES2-HS256+A128KW</value></allowedValue>
+            <allowedValue label="JWE PBES2-HS384+A192KW"><value>PBES2-HS384+A192KW</value></allowedValue>
+            <allowedValue label="JWE PBES2-HS512+A256KW"><value>PBES2-HS512+A256KW</value></allowedValue>
+            <allowedValue label="JWE RSA1_5"><value>RSA1_5</value></allowedValue>
+            <allowedValue label="JWE RSA-OAEP"><value>RSA-OAEP</value></allowedValue>
+            <allowedValue label="JWE RSA-OAEP-256"><value>RSA-OAEP-256</value></allowedValue>
+        </field>
+    </operation>
+
+    <dynamicProperty type="string" id="signature" label="Signature"/>
+
+    <dynamicProperty type="string" id="secret" label="Secret"/>
+</GenericConnectorDescriptor>
