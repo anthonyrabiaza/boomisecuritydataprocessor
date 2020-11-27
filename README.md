@@ -6,7 +6,7 @@ Dell Boomi Integration included out of the box Web of Trust functionality with P
   - For Signing and Signature validation
   - For Encryption and Decryption
 - Support of Javascript Object Signing and Encryption (JOSE):
-  - For JSON Web Signature (JWS) Signing and Signature validation
+  - For JSON Web Signature (JWS) Signing and Signature validation, for standard text payload and Java Web Token (JWT)
   - For JSON Web Encryption (JWE) Encryption and Decryption
 
 The Boomi Security Processor will accelerate the Cryptographic operations and will wrap all the complex underlying operations: 
