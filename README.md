@@ -58,7 +58,7 @@ The Boomi Security Processor will accelerate the Cryptographic operations and wi
 
 ## Getting Started
 
-Please download the library [connector-archive](target/boomisecuritydataprocessor-0.16--car.zip?raw=true) and the connector descriptor [connector-descriptor](target/classes/connector-descriptor.xml?raw=true).
+Please download the library [connector-archive](target/boomisecuritydataprocessor-0.17--car.zip?raw=true) and the connector descriptor [connector-descriptor](target/classes/connector-descriptor.xml?raw=true).
 
 ### Prerequisites in Boomi
 
