@@ -1,4 +1,5 @@
-# Boomi Data Security Processor
+# Boomi Security Data Processor
+>(aka Data Security Processor or Security Processor)
 
 I wanted to share a solution I recently developed to simplify Secured Operations around Symmetric and Asymmetric Cryptography and Digital Signature using Public Key Infrastructure with the Dell Boomi AtomSphere Platform.
 Dell Boomi Integration included out of the box Web of Trust functionality with PGP (Pretty Good Privacy) and this extension is adding:
