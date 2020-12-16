@@ -6,7 +6,7 @@ xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xs
 
     <groupId>com.boomi.connector.datasecurity</groupId>
     <artifactId>boomisecuritydataprocessor</artifactId>
-    <version>0.17</version>
+    <version>0.21</version>
 
     <properties>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>

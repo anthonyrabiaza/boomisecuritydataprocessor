@@ -133,6 +133,60 @@
         </field>
     </operation>
 
+    <operation types="GET" supportsBrowse="true">
+        <field type="string" id="action" label="Action">
+            <allowedValue label="Encrypt">
+                <value>encrypt</value>
+            </allowedValue>
+            <allowedValue label="Decrypt">
+                <value>decrypt</value>
+            </allowedValue>
+        </field>
+
+        <field type="string" id="standard" label="Standard">
+            <defaultValue>x509</defaultValue>
+            <allowedValue label="X.509 Standard">
+                <value>x509</value>
+            </allowedValue>
+        </field>
+
+        <field type="string" id="keyAlias" label="Key Alias">
+            <helpText>Key Alias from the Private Key, you can use publickey_0 for Public Key</helpText>
+            <defaultValue>1</defaultValue>
+        </field>
+
+        <field type="boolean" id="alwaysUsePrivateKey" label="Always Use PrivateKey">
+            <helpText>Use PrivateKey for encryption and decryption</helpText>
+            <defaultValue>true</defaultValue>
+        </field>
+
+        <field type="string" id="encryptingAlgorithm" label="Algorithm for encryption/decryption">
+            <helpText>Use for Encrypt and Decrypt actions</helpText>
+            <defaultValue>RSA/ECB/PKCS1Padding</defaultValue>
+
+            <allowedValue label="X.509 AES/CBC/NoPadding"><value>AES/CBC/NoPadding</value></allowedValue>
+            <allowedValue label="X.509 AES/CBC/PKCS5Padding"><value>AES/CBC/PKCS5Padding</value></allowedValue>
+            <allowedValue label="X.509 AES/ECB/NoPadding"><value>AES/ECB/NoPadding</value></allowedValue>
+            <allowedValue label="X.509 AES/ECB/PKCS5Padding"><value>AES/ECB/PKCS5Padding</value></allowedValue>
+            <allowedValue label="X.509 DES/CBC/NoPadding"><value>DES/CBC/NoPadding</value></allowedValue>
+            <allowedValue label="X.509 DES/CBC/PKCS5Padding"><value>DES/CBC/PKCS5Padding</value></allowedValue>
+            <allowedValue label="X.509 DES/ECB/NoPadding"><value>DES/ECB/NoPadding</value></allowedValue>
+            <allowedValue label="X.509 DES/ECB/PKCS5Padding"><value>DES/ECB/PKCS5Padding</value></allowedValue>
+            <allowedValue label="X.509 DESede/CBC/NoPadding"><value>DESede/CBC/NoPadding</value></allowedValue>
+            <allowedValue label="X.509 DESede/CBC/PKCS5Padding"><value>DESede/CBC/PKCS5Padding</value></allowedValue>
+            <allowedValue label="X.509 DESede/ECB/NoPadding"><value>DESede/ECB/NoPadding</value></allowedValue>
+            <allowedValue label="X.509 DESede/ECB/PKCS5Padding"><value>DESede/ECB/PKCS5Padding</value></allowedValue>
+            <allowedValue label="X.509 RSA/ECB/PKCS1Padding"><value>RSA/ECB/PKCS1Padding</value></allowedValue>
+            <allowedValue label="X.509 RSA/ECB/OAEPWithSHA-1AndMGF1Padding"><value>RSA/ECB/OAEPWithSHA-1AndMGF1Padding</value></allowedValue>
+            <allowedValue label="X.509 RSA/ECB/OAEPWithSHA-256AndMGF1Padding"><value>RSA/ECB/OAEPWithSHA-256AndMGF1Padding</value></allowedValue>
+        </field>
+
+        <field type="integer" id="salt" label="Salt size">
+            <helpText>Use for Salting to improve the encryption, put 0 to disable salting</helpText>
+            <defaultValue>8</defaultValue>
+        </field>
+    </operation>
+
     <dynamicProperty type="string" id="signature" label="Signature"/>
 
     <dynamicProperty type="string" id="secret" label="Secret"/>

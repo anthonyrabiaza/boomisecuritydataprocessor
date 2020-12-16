@@ -28,6 +28,11 @@ public class BoomiDataSecurityConnector extends BaseConnector {
     protected Operation createExecuteOperation(OperationContext context) {
         return new BoomiDataSecurityExecuteOperation(createConnection(context));
     }
+
+    @Override
+    protected Operation createGetOperation(OperationContext context) {
+        return new BoomiDataSecurityGetOperation(createConnection(context));
+    }
    
     private BoomiDataSecurityConnection createConnection(BrowseContext context) {
         return new BoomiDataSecurityConnection(context);

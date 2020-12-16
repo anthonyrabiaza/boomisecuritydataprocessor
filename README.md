@@ -59,7 +59,7 @@ The Boomi Security Processor will accelerate the Cryptographic operations and wi
 
 ## Getting Started
 
-Please download the library [connector-archive](target/boomisecuritydataprocessor-0.17--car.zip?raw=true) and the connector descriptor [connector-descriptor](target/classes/connector-descriptor.xml?raw=true).
+Please download the library [connector-archive](target/boomisecuritydataprocessor-0.21--car.zip?raw=true) and the connector descriptor [connector-descriptor](target/classes/connector-descriptor.xml?raw=true).
 
 ### Prerequisites in Boomi
 
@@ -153,3 +153,54 @@ The Following Process is the process using the *Decrypt* Operation:
 The Operation is configured as follow:
 
 ![Alt text](resources/boomi_operation_decrypting.png?raw=true "BoomiSecurityDataProcessor")
+
+## Implementing fields encryption/decryption in Map
+
+We can use the Security Processor to encrypt and decrypt fields with Salting (put 0 for the value of *salt size* to disable salting).
+
+### Creation of the Security Operation
+
+Create a new Connector Operation and click on "Import"
+
+![Alt text](resources/boomi_operation_encrypting_field_a.png?raw=true "BoomiSecurityDataProcessor")
+
+Select the object type (here Get_Encrypt)
+
+![Alt text](resources/boomi_operation_encrypting_field_b.png?raw=true "BoomiSecurityDataProcessor")
+
+Click on Next
+
+![Alt text](resources/boomi_operation_encrypting_field_c.png?raw=true "BoomiSecurityDataProcessor")
+
+Validate that the Response Profile is created and make sure that its type is Get_Encrypt if Action = Encrypt.
+
+For Action = Decrypt, please use Get_Decrypt object during the import.
+
+![Alt text](resources/boomi_operation_encrypting_field_d.png?raw=true "BoomiSecurityDataProcessor")
+
+### Map with field encryption
+
+In your Map shape:
+
+- add a function
+- select Connector Call
+- use the existing Connection
+- select the previous created Operation
+- on Input, select ID
+- on Output, select the corresponding object (encryptedValue or decryptedValue)
+
+![Alt text](resources/boomi_operation_encrypting_field_e.png?raw=true "BoomiSecurityDataProcessor")
+
+Validate the input and output of the Function
+
+![Alt text](resources/boomi_operation_encrypting_field_f.png?raw=true "BoomiSecurityDataProcessor")
+
+### Overall Process using the map with field encryption
+
+Example of process reading values in JSON and writing to a DB
+
+![Alt text](resources/boomi_process_encrypting_field.png?raw=true "BoomiSecurityDataProcessor")
+
+Output in the DB , **please make sure that the size of the column is wide enough** (in our example a field of 16 chars + salt of 8 chars is converted to a string of 344 chars)
+
+![Alt text](resources/boomi_process_encrypting_field_db.png?raw=true "BoomiSecurityDataProcessor")

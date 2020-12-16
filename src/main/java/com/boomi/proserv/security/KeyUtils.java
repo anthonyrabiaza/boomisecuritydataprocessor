@@ -1,11 +1,7 @@
 package com.boomi.proserv.security;
 
 import java.io.FileInputStream;
-import java.security.KeyStore;
-import java.security.PrivateKey;
-import java.security.Provider;
-import java.security.PublicKey;
-import java.security.Security;
+import java.security.*;
 import java.security.cert.Certificate;
 import java.security.cert.CertificateFactory;
 import java.security.cert.X509Certificate;
@@ -80,5 +76,11 @@ public class KeyUtils {
 	//		return kf.generatePrivate(spec);
 	//	}
 
-
+	public static String generateSecureString(int length) throws Exception {
+		String chars = "0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ";
+		SecureRandom secureRandom = SecureRandom.getInstanceStrong();
+		String secureString = secureRandom.ints(length, 0, chars.length()).mapToObj(i -> chars.charAt(i))
+				.collect(StringBuilder::new, StringBuilder::append, StringBuilder::append).toString();
+		return secureString;
+	}
 }
