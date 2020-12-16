@@ -156,11 +156,11 @@ The Operation is configured as follow:
 
 ## Implementing fields encryption/decryption in Map
 
-We can use the Security Processor to encrypt and decrypt fields with Salting (put 0 for the value of *salt size* to disable salting).
+We can use the Get operation of Security Processor to encrypt and decrypt fields with Salting (put 0 for the value of *salt size* to disable salting).
 
 ### Creation of the Security Operation
 
-Create a new Connector Operation and click on "Import"
+Create a new Connector Operation with "GET" type and click on "Import"
 
 ![Alt text](resources/boomi_operation_encrypting_field_a.png?raw=true "BoomiSecurityDataProcessor")
 
