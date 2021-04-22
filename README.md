@@ -178,6 +178,32 @@ For Action = Decrypt, please use Get_Decrypt object during the import.
 
 ![Alt text](resources/boomi_operation_encrypting_field_d.png?raw=true "BoomiSecurityDataProcessor")
 
+### Operation Key Alias
+
+The value for Key Alias is the *alias name* of the entry value from the Private or Private Key.
+
+There are multiple ways to get this value.
+
+1. Using keytool
+
+```shell
+keytool -v -list -keystore boomi.pfx 
+Enter keystore password:  
+Keystore type: PKCS12
+Keystore provider: SUN
+
+Your keystore contains 1 entry
+
+Alias name: 1
+```
+2. Using keystore explorer
+
+![Alt text](resources/keystore-explorer.png?raw=true "BoomiSecurityDataProcessor")
+
+In our case, we have to put **1** as *Key Alias*.
+
+For public key, use the value: **publickey_0**
+
 ### Map with field encryption
 
 In your Map shape:
