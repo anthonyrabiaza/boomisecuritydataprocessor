@@ -28,6 +28,24 @@ class X509EncryptingTest {
 	}
 
 	@Test
+	void testPassword() throws Exception {
+		X509Encrypting encrypting = new X509Encrypting();
+
+		System.out.println("Loading password...");
+		String message 	= "!password123#";
+		System.out.println(">Password: " + message);
+		assertNotNull("Password not null", message);
+
+		String messageEncrypted = encrypting.encrypt(message, TestSecurityHelper.getPublicKey(), "RSA/ECB/PKCS1Padding");
+		System.out.println(">Password Encrypted: " + messageEncrypted);
+
+		String messageRecovered = encrypting.decrypt(messageEncrypted, TestSecurityHelper.getPrivateKey(), "RSA/ECB/PKCS1Padding");
+		System.out.println(">Password decrypted: " + messageRecovered);
+
+		assertEquals(message, messageRecovered);
+	}
+
+	@Test
 	void testWithSalt() throws Exception {
 		X509Encrypting encrypting = new X509Encrypting();
 
