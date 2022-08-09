@@ -42,6 +42,9 @@
             <allowedValue label="Javascript Object Signing and Encryption (JWS and JWE)">
                 <value>jose</value>
             </allowedValue>
+            <allowedValue label="Secure/Multipurpose Internet Mail Extensions (S/MIME)">
+                <value>s/mime</value>
+            </allowedValue>
         </field>
 
         <field type="string" id="keyAlias" label="Key Alias">
@@ -104,6 +107,58 @@
             <allowedValue label="JWE A128GCM"><value>A128GCM</value></allowedValue>
             <allowedValue label="JWE A192GCM"><value>A192GCM</value></allowedValue>
             <allowedValue label="JWE A256GCM"><value>A256GCM</value></allowedValue>
+
+            <allowedValue label="S/MIME DES_CBC"><value>DES_CBC</value></allowedValue>
+            <allowedValue label="S/MIME DES_EDE3_CBC"><value>DES_EDE3_CBC</value></allowedValue>
+            <allowedValue label="S/MIME RC2_CBC"><value>RC2_CBC</value></allowedValue>
+            <allowedValue label="S/MIME IDEA_CBC"><value>IDEA_CBC</value></allowedValue>
+            <allowedValue label="S/MIME CAST5_CBC"><value>CAST5_CBC</value></allowedValue>
+            <allowedValue label="S/MIME AES128_CBC"><value>AES128_CBC</value></allowedValue>
+            <allowedValue label="S/MIME AES192_CBC"><value>AES192_CBC</value></allowedValue>
+            <allowedValue label="S/MIME AES256_CBC"><value>AES256_CBC</value></allowedValue>
+            <allowedValue label="S/MIME AES128_CCM"><value>AES128_CCM</value></allowedValue>
+            <allowedValue label="S/MIME AES192_CCM"><value>AES192_CCM</value></allowedValue>
+            <allowedValue label="S/MIME AES256_CCM"><value>AES256_CCM</value></allowedValue>
+            <allowedValue label="S/MIME AES128_GCM"><value>AES128_GCM</value></allowedValue>
+            <allowedValue label="S/MIME AES192_GCM"><value>AES192_GCM</value></allowedValue>
+            <allowedValue label="S/MIME AES256_GCM"><value>AES256_GCM</value></allowedValue>
+            <allowedValue label="S/MIME CAMELLIA128_CBC"><value>CAMELLIA128_CBC</value></allowedValue>
+            <allowedValue label="S/MIME CAMELLIA192_CBC"><value>CAMELLIA192_CBC</value></allowedValue>
+            <allowedValue label="S/MIME CAMELLIA256_CBC"><value>CAMELLIA256_CBC</value></allowedValue>
+            <allowedValue label="S/MIME SEED_CBC"><value>SEED_CBC</value></allowedValue>
+            <allowedValue label="S/MIME DES_EDE3_WRAP"><value>DES_EDE3_WRAP</value></allowedValue>
+            <allowedValue label="S/MIME AES128_WRAP"><value>AES128_WRAP</value></allowedValue>
+            <allowedValue label="S/MIME AES192_WRAP"><value>AES192_WRAP</value></allowedValue>
+            <allowedValue label="S/MIME AES256_WRAP"><value>AES256_WRAP</value></allowedValue>
+            <allowedValue label="S/MIME CAMELLIA128_WRAP"><value>CAMELLIA128_WRAP</value></allowedValue>
+            <allowedValue label="S/MIME CAMELLIA192_WRAP"><value>CAMELLIA192_WRAP</value></allowedValue>
+            <allowedValue label="S/MIME CAMELLIA256_WRAP"><value>CAMELLIA256_WRAP</value></allowedValue>
+            <allowedValue label="S/MIME SEED_WRAP"><value>SEED_WRAP</value></allowedValue>
+            <allowedValue label="S/MIME ECDH_SHA1KDF"><value>ECDH_SHA1KDF</value></allowedValue>
+            <allowedValue label="S/MIME ECCDH_SHA1KDF"><value>ECCDH_SHA1KDF</value></allowedValue>
+            <allowedValue label="S/MIME ECMQV_SHA1KDF"><value>ECMQV_SHA1KDF</value></allowedValue>
+            <allowedValue label="S/MIME ECDH_SHA224KDF"><value>ECDH_SHA224KDF</value></allowedValue>
+            <allowedValue label="S/MIME ECCDH_SHA224KDF"><value>ECCDH_SHA224KDF</value></allowedValue>
+            <allowedValue label="S/MIME ECMQV_SHA224KDF"><value>ECMQV_SHA224KDF</value></allowedValue>
+            <allowedValue label="S/MIME ECDH_SHA256KDF"><value>ECDH_SHA256KDF</value></allowedValue>
+            <allowedValue label="S/MIME ECCDH_SHA256KDF"><value>ECCDH_SHA256KDF</value></allowedValue>
+            <allowedValue label="S/MIME ECMQV_SHA256KDF"><value>ECMQV_SHA256KDF</value></allowedValue>
+            <allowedValue label="S/MIME ECDH_SHA384KDF"><value>ECDH_SHA384KDF</value></allowedValue>
+            <allowedValue label="S/MIME ECCDH_SHA384KDF"><value>ECCDH_SHA384KDF</value></allowedValue>
+            <allowedValue label="S/MIME ECMQV_SHA384KDF"><value>ECMQV_SHA384KDF</value></allowedValue>
+            <allowedValue label="S/MIME ECDH_SHA512KDF"><value>ECDH_SHA512KDF</value></allowedValue>
+            <allowedValue label="S/MIME ECCDH_SHA512KDF"><value>ECCDH_SHA512KDF</value></allowedValue>
+            <allowedValue label="S/MIME ECMQV_SHA512KDF"><value>ECMQV_SHA512KDF</value></allowedValue>
+            <allowedValue label="S/MIME SHA1"><value>SHA1</value></allowedValue>
+            <allowedValue label="S/MIME SHA224"><value>SHA224</value></allowedValue>
+            <allowedValue label="S/MIME SHA256"><value>SHA256</value></allowedValue>
+            <allowedValue label="S/MIME SHA384"><value>SHA384</value></allowedValue>
+            <allowedValue label="S/MIME SHA512"><value>SHA512</value></allowedValue>
+            <allowedValue label="S/MIME MD5"><value>MD5</value></allowedValue>
+            <allowedValue label="S/MIME GOST3411"><value>GOST3411</value></allowedValue>
+            <allowedValue label="S/MIME RIPEMD128"><value>RIPEMD128</value></allowedValue>
+            <allowedValue label="S/MIME RIPEMD160"><value>RIPEMD160</value></allowedValue>
+            <allowedValue label="S/MIME RIPEMD256"><value>RIPEMD256</value></allowedValue>
         </field>
 
         <!-- alg -->
@@ -190,4 +245,8 @@
     <dynamicProperty type="string" id="signature" label="Signature"/>
 
     <dynamicProperty type="string" id="secret" label="Secret"/>
+
+    <dynamicProperty type="string" id="from" label="From"/>
+    <dynamicProperty type="string" id="to" label="To"/>
+    <dynamicProperty type="string" id="subject" label="Subject"/>
 </GenericConnectorDescriptor>

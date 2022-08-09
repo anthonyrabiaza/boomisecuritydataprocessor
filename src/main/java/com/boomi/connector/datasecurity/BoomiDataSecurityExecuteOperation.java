@@ -15,6 +15,7 @@ import com.boomi.connector.api.ResponseUtil;
 import com.boomi.connector.api.UpdateRequest;
 import com.boomi.connector.util.BaseUpdateOperation;
 import com.boomi.proserv.security.encrypting.JWEEncrypting;
+import com.boomi.proserv.security.encrypting.SMIMEEncrypting;
 import com.boomi.proserv.security.encrypting.X509Encrypting;
 import com.boomi.proserv.security.signing.JWSSigning;
 import com.boomi.proserv.security.signing.X509Signing;
@@ -49,9 +50,12 @@ public class BoomiDataSecurityExecuteOperation extends BaseUpdateOperation {
 
 		PrivateKey privateKey;
 		PublicKey publicKey;
+		Certificate certificate;
 		String secret;
 		String signature;
-		
+		String from;
+		String to;
+		String subject;
 		
 		for (ObjectData input : request) {
 			try {
@@ -104,6 +108,13 @@ public class BoomiDataSecurityExecuteOperation extends BaseUpdateOperation {
 											result		= new JWEEncrypting().encrypt(message, secret, encryptingAlgorithmHeader, encryptingAlgorithm);
 										}
 									break;
+									case "s/mime":
+										from = input.getDynamicProperties().get("from");
+										to = input.getDynamicProperties().get("to");
+										subject = input.getDynamicProperties().get("subject");
+										certificate = getCertificate(keyAlias);
+										result		= new SMIMEEncrypting().encrypt(message, from, to, subject, certificate, encryptingAlgorithm);
+									break;
 									default:
 								}
 							break;
@@ -122,6 +133,11 @@ public class BoomiDataSecurityExecuteOperation extends BaseUpdateOperation {
 
 											result		= new JWEEncrypting().decrypt(message, secret, encryptingAlgorithmHeader, encryptingAlgorithm);
 										}
+									break;
+									case "s/mime":
+										certificate = getCertificate(keyAlias);
+										privateKey 	= getPrivateKey(keyAlias);
+										result		= new SMIMEEncrypting().decrypt(message, privateKey, certificate, encryptingAlgorithm);
 									break;
 									default:
 								}
@@ -146,7 +162,8 @@ public class BoomiDataSecurityExecuteOperation extends BaseUpdateOperation {
 		}
 	}
 
-	private PublicKey getPublicKey(String keyAlias) throws Exception {
+
+	private Certificate getCertificate(String keyAlias) throws Exception {
 		PublicKeyStore publickeyStore;
 		PublicKey publicKey;
 		Certificate certificate;
@@ -155,8 +172,10 @@ public class BoomiDataSecurityExecuteOperation extends BaseUpdateOperation {
 		if(certificate == null) {
 			throw new Exception("Key alias " + keyAlias + " not found");
 		}
-		publicKey 		= certificate.getPublicKey();
-		return publicKey;
+		return certificate;
+	}
+	private PublicKey getPublicKey(String keyAlias) throws Exception {
+		return getCertificate(keyAlias).getPublicKey();
 	}
 
 	private PrivateKey getPrivateKey(String keyAlias) throws Exception {

@@ -1,11 +1,12 @@
 package com.boomi.proserv.security;
 
-import java.io.FileInputStream;
+import java.io.*;
 import java.security.*;
 import java.security.cert.Certificate;
 import java.security.cert.CertificateFactory;
 import java.security.cert.X509Certificate;
 import java.util.Base64;
+import java.util.stream.Collectors;
 
 /**
  * KeyUtils class
@@ -37,19 +38,32 @@ public class KeyUtils {
 	 * @throws Exception
 	 */
 	public static PublicKey loadPublicKey(String filename, String alias, String password) throws Exception {
-		if(filename.toLowerCase().endsWith(".p12") || filename.toLowerCase().endsWith(".pfx")) {
+		return getCertificate(filename, alias, password).getPublicKey();
+	}
+
+	/**
+	 * Get Certificate from .p12/.pfx extension (in PKCS12 format) or with .cer/.crt extension
+	 * @param filename
+	 * @param alias
+	 * @param password
+	 * @return
+	 * @throws Exception
+	 */
+	public static Certificate getCertificate(String filename, String alias, String password) throws Exception {
+		if (filename.toLowerCase().endsWith(".p12") || filename.toLowerCase().endsWith(".pfx")) {
 			KeyStore keyStore = KeyStore.getInstance("PKCS12");
 			keyStore.load(new FileInputStream(filename), password.toCharArray());
 			Certificate certificate = keyStore.getCertificate(alias);
-			return certificate.getPublicKey();
+			return certificate;
 		} else {
-			FileInputStream fr = new FileInputStream(filename); 
-			CertificateFactory cf = CertificateFactory.getInstance("X509"); 
+			FileInputStream fr = new FileInputStream(filename);
+			CertificateFactory cf = CertificateFactory.getInstance("X509");
 			X509Certificate cert = (X509Certificate) cf.generateCertificate(fr);
-			return cert.getPublicKey();
+			return cert;
 		}
 	}
-	
+
+
 	public static void showSecurityProviders() {
 		Provider[] providers = Security.getProviders();
 		for (int i = 0; i < providers.length; i++) {
@@ -82,5 +96,27 @@ public class KeyUtils {
 		String secureString = secureRandom.ints(length, 0, chars.length()).mapToObj(i -> chars.charAt(i))
 				.collect(StringBuilder::new, StringBuilder::append, StringBuilder::append).toString();
 		return secureString;
+	}
+
+	/**
+	 * Utility to convert InputStream to String
+	 * @param is
+	 * @return
+	 * @throws IOException
+	 */
+	public static String inputStreamToString(InputStream is) throws IOException {
+		try (BufferedReader buffer = new BufferedReader(new InputStreamReader(is))) {
+			return buffer.lines().collect(Collectors.joining("\n"));
+		}
+	}
+
+	/**
+	 * Utility to convert String to InputStream
+	 * @param str
+	 * @return
+	 * @throws IOException
+	 */
+	public static InputStream stringToInputStream(String str) throws IOException {
+		return new ByteArrayInputStream(str.getBytes());
 	}
 }
