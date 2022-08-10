@@ -42,6 +42,9 @@
             <allowedValue label="Javascript Object Signing and Encryption (JWS and JWE)">
                 <value>jose</value>
             </allowedValue>
+            <allowedValue label="Secure/Multipurpose Internet Mail Extensions (S/MIME)">
+                <value>s/mime</value>
+            </allowedValue>
         </field>
 
         <field type="string" id="keyAlias" label="Key Alias">
@@ -104,6 +107,15 @@
             <allowedValue label="JWE A128GCM"><value>A128GCM</value></allowedValue>
             <allowedValue label="JWE A192GCM"><value>A192GCM</value></allowedValue>
             <allowedValue label="JWE A256GCM"><value>A256GCM</value></allowedValue>
+
+            <allowedValue label="S/MIME TRIPLEDES"><value>TRIPLEDES</value></allowedValue>
+            <allowedValue label="S/MIME DES"><value>DES</value></allowedValue>
+            <allowedValue label="S/MIME RC_2_128"><value>RC_2_128</value></allowedValue>
+            <allowedValue label="S/MIME RC_2_64"><value>RC_2_64</value></allowedValue>
+            <allowedValue label="S/MIME RC_2_40"><value>RC_2_40</value></allowedValue>
+            <allowedValue label="S/MIME AES_128"><value>AES_128</value></allowedValue>
+            <allowedValue label="S/MIME AES_192"><value>AES_192</value></allowedValue>
+            <allowedValue label="S/MIME AES_256"><value>AES_256</value></allowedValue>
         </field>
 
         <!-- alg -->
@@ -190,4 +202,6 @@
     <dynamicProperty type="string" id="signature" label="Signature"/>
 
     <dynamicProperty type="string" id="secret" label="Secret"/>
+
+    <dynamicProperty type="string" id="alias" label="Public Key Alias for Decryption"/>
 </GenericConnectorDescriptor>

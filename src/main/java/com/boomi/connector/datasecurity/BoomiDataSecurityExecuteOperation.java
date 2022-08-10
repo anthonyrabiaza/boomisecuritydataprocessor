@@ -109,11 +109,8 @@ public class BoomiDataSecurityExecuteOperation extends BaseUpdateOperation {
 										}
 									break;
 									case "s/mime":
-										from = input.getDynamicProperties().get("from");
-										to = input.getDynamicProperties().get("to");
-										subject = input.getDynamicProperties().get("subject");
 										certificate = getCertificate(keyAlias);
-										result		= new SMIMEEncrypting().encrypt(message, from, to, subject, certificate, encryptingAlgorithm);
+										result		= new SMIMEEncrypting().encrypt(message, certificate, encryptingAlgorithm);
 									break;
 									default:
 								}
@@ -135,7 +132,7 @@ public class BoomiDataSecurityExecuteOperation extends BaseUpdateOperation {
 										}
 									break;
 									case "s/mime":
-										certificate = getCertificate(keyAlias);
+										certificate = getCertificate(input.getDynamicProperties().get("alias"));
 										privateKey 	= getPrivateKey(keyAlias);
 										result		= new SMIMEEncrypting().decrypt(message, privateKey, certificate, encryptingAlgorithm);
 									break;
