@@ -22,7 +22,7 @@ The Boomi Security Processor will accelerate the Cryptographic operations and wi
 ## Exhaustive list of pre-configured Actions, Standards and Algorithms
 
 | Actions                  | Standard | Algorithm     |
-| --------------------------- | -------- | ------------- |
+| --------------------------- |----------| ------------- |
 | Sign *or* Validate Signature | X.509    | SHA1withDSA   |
 |                             | X.509    | SHA1withRSA   |
 |                             | X.509    | SHA256withRSA |
@@ -50,12 +50,20 @@ The Boomi Security Processor will accelerate the Cryptographic operations and wi
 |          | X.509    | RSA/ECB/PKCS1Padding |
 |          | X.509    | RSA/ECB/OAEPWithSHA-1AndMGF1Padding |
 |          | X.509    | RSA/ECB/OAEPWithSHA-256AndMGF1Padding |
-| Encrypt *or* Decrypt | JWE  | A128CBC-HS256 |
-|          | JWE | A192CBC-HS384 |
-|          | JWE | A256CBC-HS512 |
-|          | JWE | A128GCM       |
-|          | JWE | A192GCM       |
-|          | JWE | A256GCM       |
+| Encrypt *or* Decrypt | JWE      | A128CBC-HS256 |
+|          | JWE      | A192CBC-HS384 |
+|          | JWE      | A256CBC-HS512 |
+|          | JWE      | A128GCM       |
+|          | JWE      | A192GCM       |
+|          | JWE      | A256GCM       |
+| Encrypt *or* Decrypt | S/MIME   | TRIPLEDES |
+|          | S/MIME      | DES |
+|          | S/MIME      | RC_2_128 |
+|          | S/MIME      | RC_2_64       |
+|          | S/MIME      | RC_2_40       |
+|          | S/MIME      | AES_128       |
+|          | S/MIME      | AES_192       |
+|          | S/MIME      | AES_256       |
 
 ## Getting Started
 
