@@ -6,6 +6,8 @@ Dell Boomi Integration included out of the box Web of Trust functionality with P
 - Support of X.509:
   - For Signing and Signature validation
   - For Encryption and Decryption
+    - Payload direct encryption/decryption
+    - S/MIME encryption/decryption
 - Support of Javascript Object Signing and Encryption (JOSE):
   - For JSON Web Signature (JWS) Signing and Signature validation, for standard text payload and Java Web Token (JWT)
   - For JSON Web Encryption (JWE) Encryption and Decryption
