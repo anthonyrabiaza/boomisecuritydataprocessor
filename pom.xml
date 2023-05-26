@@ -113,7 +113,7 @@ xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xs
         </dependency>
         <dependency>
             <groupId>org.bouncycastle</groupId>
-            <artifactId>bcpg-jdk15to18</artifactId>
+            <artifactId>bcpg-jdk16</artifactId>
             <version>1.45</version>
             <scope>system</scope>
             <systemPath>${boomi.local.path}/bcpg-jdk16-1.45.jar</systemPath>
