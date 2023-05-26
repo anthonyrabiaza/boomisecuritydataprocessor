@@ -213,9 +213,10 @@ public class BoomiDataSecurityExecuteOperation extends BaseUpdateOperation {
 					try {
 						switch (action) {
 							case "sign":
-								String keyPassphrase 	= input.getDynamicProperties().get("keyPassphrase");
-								String pgpPrivateKey 	= input.getDynamicProperties().get("pgpPrivateKey");
-								result = new PGPSigning().sign(message, PGPKeyUtils.getPGPPrivateKey(KeyUtils.stringToInputStream(pgpPrivateKey)), keyPassphrase, Integer.parseInt(hashingAlgorithm), Integer.parseInt(compressionAlgorithm));
+								String keyPassphrase 		= input.getDynamicProperties().get("keyPassphrase");
+								String pgpPrivateKeyContent = input.getDynamicProperties().get("pgpPrivateKey");
+								PGPSecretKey pgpPrivateKey 	= PGPKeyUtils.getPGPPrivateKey(KeyUtils.stringToInputStream(pgpPrivateKeyContent));
+								result = new PGPSigning().sign(message, pgpPrivateKey, keyPassphrase, Integer.parseInt(hashingAlgorithm), Integer.parseInt(compressionAlgorithm));
 								break;
 							case "signAndEncrypt":
 								break;

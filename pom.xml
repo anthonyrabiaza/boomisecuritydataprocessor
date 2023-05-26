@@ -6,7 +6,7 @@ xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xs
 
     <groupId>com.boomi.connector.datasecurity</groupId>
     <artifactId>boomisecuritydataprocessor</artifactId>
-    <version>0.37</version>
+    <version>0.39</version>
 
     <properties>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
@@ -85,38 +85,38 @@ xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xs
         </dependency>
         <dependency>
             <groupId>org.bouncycastle</groupId>
-            <artifactId>bcmail-jdk15to18</artifactId>
-            <version>1.70</version>
+            <artifactId>bcmail-jdk15on</artifactId>
+            <version>1.45</version>
             <scope>system</scope>
-            <systemPath>${boomi.local.path}/bcmail-jdk15to18.jar</systemPath>
+            <systemPath>${boomi.local.path}/bcmail-jdk16-1.45.boomi1.jar</systemPath>
         </dependency>
         <dependency>
             <groupId>org.bouncycastle</groupId>
             <artifactId>bcpkix-jdk15to18.jar</artifactId>
-            <version>1.70</version>
+            <version>1.45</version>
             <scope>system</scope>
             <systemPath>${boomi.local.path}/bcpkix-jdk15to18.jar</systemPath>
         </dependency>
         <dependency>
             <groupId>org.bouncycastle</groupId>
-            <artifactId>bcprov-jdk15to18</artifactId>
-            <version>1.70</version>
+            <artifactId>bcprov-jdk16</artifactId>
+            <version>1.45</version>
             <scope>system</scope>
-            <systemPath>${boomi.local.path}/bcprov-jdk15to18.jar</systemPath>
+            <systemPath>${boomi.local.path}/bcprov-jdk16-1.45.jar</systemPath>
         </dependency>
         <dependency>
             <groupId>org.bouncycastle</groupId>
             <artifactId>bcutil-jdk15to18</artifactId>
-            <version>1.70</version>
+            <version>1.45</version>
             <scope>system</scope>
             <systemPath>${boomi.local.path}/bcutil-jdk15to18.jar</systemPath>
         </dependency>
         <dependency>
             <groupId>org.bouncycastle</groupId>
             <artifactId>bcpg-jdk15to18</artifactId>
-            <version>1.70</version>
+            <version>1.45</version>
             <scope>system</scope>
-            <systemPath>${boomi.local.path}/bcpg-jdk15to18.jar</systemPath>
+            <systemPath>${boomi.local.path}/bcpg-jdk16-1.45.jar</systemPath>
         </dependency>
         <dependency>
             <groupId>boomi-mime</groupId>
