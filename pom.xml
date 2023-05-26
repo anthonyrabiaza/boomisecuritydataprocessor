@@ -6,7 +6,7 @@ xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xs
 
     <groupId>com.boomi.connector.datasecurity</groupId>
     <artifactId>boomisecuritydataprocessor</artifactId>
-    <version>0.30</version>
+    <version>0.37</version>
 
     <properties>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
@@ -14,6 +14,7 @@ xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xs
         <maven.compiler.target>1.8</maven.compiler.target>
         <maven.assembly.plugin.version>2.6</maven.assembly.plugin.version>
         <connector.sdk.version>2.8.2</connector.sdk.version>
+        <boomi.local.path>/home/ant/OneDrive/MyDev/lib/boomi</boomi.local.path>
     </properties>
 
     <repositories>
@@ -79,63 +80,57 @@ xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xs
         <dependency>
             <groupId>com.sun.mail</groupId>
             <artifactId>javax.mail</artifactId>
-            <version>1.4.7</version>
+            <version>1.5.6</version>
             <scope>provided</scope>
         </dependency>
         <dependency>
             <groupId>org.bouncycastle</groupId>
-            <artifactId>bcmail-jdk15on</artifactId>
-            <version>1.56</version>
-            <scope>provided</scope>
+            <artifactId>bcmail-jdk15to18</artifactId>
+            <version>1.70</version>
+            <scope>system</scope>
+            <systemPath>${boomi.local.path}/bcmail-jdk15to18.jar</systemPath>
         </dependency>
         <dependency>
             <groupId>org.bouncycastle</groupId>
-            <artifactId>bcmail-jdk15on</artifactId>
-            <version>1.45</version>
+            <artifactId>bcpkix-jdk15to18.jar</artifactId>
+            <version>1.70</version>
             <scope>system</scope>
-            <systemPath>/Users/kaixuanng/Documents/Boomi/Boomi_Atomsphere/Atom/lib/bcmail-jdk15to18.jar</systemPath>
-        </dependency>
-        <dependency>
-            <groupId>org.bouncycastle</groupId>
-            <artifactId>bcpkix-jdk15on</artifactId>
-            <version>1.45</version>
-            <scope>system</scope>
-            <systemPath>/Users/kaixuanng/Documents/Boomi/Boomi_Atomsphere/Atom/lib/bcpkix-jdk15to18.jar</systemPath>
+            <systemPath>${boomi.local.path}/bcpkix-jdk15to18.jar</systemPath>
         </dependency>
         <dependency>
             <groupId>org.bouncycastle</groupId>
             <artifactId>bcprov-jdk15to18</artifactId>
-            <version>1.45</version>
+            <version>1.70</version>
             <scope>system</scope>
-            <systemPath>/Users/kaixuanng/Documents/Boomi/Boomi_Atomsphere/Atom/lib/bcprov-jdk15to18.jar</systemPath>
+            <systemPath>${boomi.local.path}/bcprov-jdk15to18.jar</systemPath>
         </dependency>
         <dependency>
             <groupId>org.bouncycastle</groupId>
             <artifactId>bcutil-jdk15to18</artifactId>
-            <version>1.45</version>
+            <version>1.70</version>
             <scope>system</scope>
-            <systemPath>/Users/kaixuanng/Documents/Boomi/Boomi_Atomsphere/Atom/lib/bcutil-jdk15to18.jar</systemPath>
+            <systemPath>${boomi.local.path}/bcutil-jdk15to18.jar</systemPath>
         </dependency>
         <dependency>
             <groupId>org.bouncycastle</groupId>
-            <artifactId>bcpg-jdk15on</artifactId>
+            <artifactId>bcpg-jdk15to18</artifactId>
             <version>1.70</version>
             <scope>system</scope>
-            <systemPath>/Users/kaixuanng/Documents/Boomi/Boomi_Atomsphere/Atom/lib/bcpg-jdk15on-1.70.jar</systemPath>
+            <systemPath>${boomi.local.path}/bcpg-jdk15to18.jar</systemPath>
         </dependency>
         <dependency>
             <groupId>boomi-mime</groupId>
             <artifactId>com.boomi.mime</artifactId>
-            <version>1.2.2</version>
+            <version>1.2.4</version>
             <scope>system</scope>
-            <systemPath>/Users/kaixuanng/Documents/Boomi/Boomi_Atomsphere/Atom/lib/boomi-mime.jar</systemPath>
+            <systemPath>${boomi.local.path}/boomi-mime.jar</systemPath>
         </dependency>
         <dependency>
             <groupId>boomi-util</groupId>
             <artifactId>com.boomi.util</artifactId>
             <version>2.3.23</version>
             <scope>system</scope>
-            <systemPath>/Users/kaixuanng/Documents/Boomi/Boomi_Atomsphere/Atom/lib/boomi-util.jar</systemPath>
+            <systemPath>${boomi.local.path}/boomi-util.jar</systemPath>
         </dependency>
         <dependency>
             <groupId>net.markenwerk</groupId>

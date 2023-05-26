@@ -199,9 +199,99 @@
         </field>
     </operation>
 
+    <operation types="EXECUTE" inputType="binary"
+               outputType="binary" customTypeId="PGP" customTypeLabel="EXECUTE PGP">
+
+        <field type="string" id="action" label="Action">
+            <defaultValue>sign</defaultValue>
+            <allowedValue label="Sign">
+                <value>sign</value>
+            </allowedValue>
+            <allowedValue label="Sign and Encrypt">
+                <value>signAndEncrypt</value>
+            </allowedValue>
+            <allowedValue label="Validate Signature">
+                <value>validateSignature</value>
+            </allowedValue>
+            <allowedValue label="Encrypt">
+                <value>encrypt</value>
+            </allowedValue>
+            <allowedValue label="Decrypt">
+                <value>decrypt</value>
+            </allowedValue>
+        </field>
+
+        <field type="string" id="hashingAlgorithm" label="Algorithm for hashing">
+            <helpText>TODO</helpText>
+            <defaultValue>8</defaultValue>
+
+            <allowedValue label="Not used"><value>NONE</value></allowedValue>
+            <allowedValue label="MD4"><value>301</value></allowedValue>
+            <allowedValue label="MD5"><value>1</value></allowedValue>
+            <allowedValue label="SHA1"><value>2</value></allowedValue>
+            <allowedValue label="RIPEMD160"><value>3</value></allowedValue>
+            <allowedValue label="DOUBLE_SHA"><value>4</value></allowedValue>
+            <allowedValue label="MD2"><value>5</value></allowedValue>
+            <allowedValue label="TIGER_192"><value>6</value></allowedValue>
+            <allowedValue label="HAVAL_5_160"><value>7</value></allowedValue>
+            <allowedValue label="SHA256"><value>8</value></allowedValue>
+            <allowedValue label="SHA384"><value>9</value></allowedValue>
+            <allowedValue label="SHA224"><value>11</value></allowedValue>
+            <allowedValue label="SHA512"><value>10</value></allowedValue>
+            <allowedValue label="SHA3_224"><value>312</value></allowedValue>
+            <allowedValue label="SHA3_256"><value>313</value></allowedValue>
+            <allowedValue label="SHA3_384"><value>314</value></allowedValue>
+            <allowedValue label="SHA3_512"><value>315</value></allowedValue>
+            <allowedValue label="SM3"><value>326</value></allowedValue>
+        </field>
+
+        <field type="string" id="compressionAlgorithm" label="Algorithm for compression">
+            <helpText>TODO</helpText>
+            <defaultValue>0</defaultValue>
+
+            <allowedValue label="Not used"><value>NONE</value></allowedValue>
+            <allowedValue label="UNCOMPRESSED"><value>0</value></allowedValue>
+            <allowedValue label="ZIP"><value>1</value></allowedValue>
+            <allowedValue label="ZLIB"><value>2</value></allowedValue>
+            <allowedValue label="BZIP2"><value>3</value></allowedValue>
+        </field>
+
+        <field type="string" id="symmetricKeyAlgorithm" label="Algorithm for symetricKey">
+            <helpText>TODO</helpText>
+            <defaultValue>9</defaultValue>
+
+            <allowedValue label="Not used"><value>NONE</value></allowedValue>
+            <allowedValue label="IDEA"><value>1</value></allowedValue>
+            <allowedValue label="TRIPLE_DES"><value>2</value></allowedValue>
+            <allowedValue label="CAST5"><value>3</value></allowedValue>
+            <allowedValue label="BLOWFISH"><value>4</value></allowedValue>
+            <allowedValue label="SAFER"><value>5</value></allowedValue>
+            <allowedValue label="DES"><value>6</value></allowedValue>
+            <allowedValue label="AES_128"><value>7</value></allowedValue>
+            <allowedValue label="AES_192"><value>8</value></allowedValue>
+            <allowedValue label="AES_256"><value>9</value></allowedValue>
+            <allowedValue label="TWOFISH"><value>10</value></allowedValue>
+            <allowedValue label="CAMELLIA_128"><value>11</value></allowedValue>
+            <allowedValue label="CAMELLIA_192"><value>12</value></allowedValue>
+            <allowedValue label="CAMELLIA_256"><value>13</value></allowedValue>
+        </field>
+
+        <field type="boolean" id="applyIntegrityCheck" label="Apply Integrity check">
+            <helpText>TODO</helpText>
+            <defaultValue>false</defaultValue>
+        </field>
+    </operation>
+
     <dynamicProperty type="string" id="signature" label="Signature"/>
 
     <dynamicProperty type="string" id="secret" label="Secret"/>
 
     <dynamicProperty type="string" id="alias" label="Public Key Alias for Decryption"/>
+
+    <dynamicProperty type="string" id="pgpPrivateKey" label="Private Key"/>
+
+    <dynamicProperty type="string" id="pgpPublicKey" label="Public Key"/>
+
+    <dynamicProperty type="string" id="keyPassphrase" label="Key Passphrase"/>
+
 </GenericConnectorDescriptor>

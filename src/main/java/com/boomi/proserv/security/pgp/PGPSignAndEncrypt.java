@@ -3,7 +3,15 @@ package com.boomi.proserv.security.pgp;
 import org.bouncycastle.bcpg.ArmoredOutputStream;
 import org.bouncycastle.bcpg.BCPGOutputStream;
 import org.bouncycastle.jce.provider.BouncyCastleProvider;
-import org.bouncycastle.openpgp.*;
+import org.bouncycastle.openpgp.PGPCompressedDataGenerator;
+import org.bouncycastle.openpgp.PGPEncryptedDataGenerator;
+import org.bouncycastle.openpgp.PGPLiteralData;
+import org.bouncycastle.openpgp.PGPLiteralDataGenerator;
+import org.bouncycastle.openpgp.PGPPrivateKey;
+import org.bouncycastle.openpgp.PGPPublicKey;
+import org.bouncycastle.openpgp.PGPSecretKey;
+import org.bouncycastle.openpgp.PGPSignature;
+import org.bouncycastle.openpgp.PGPSignatureGenerator;
 import org.bouncycastle.openpgp.operator.PBESecretKeyDecryptor;
 import org.bouncycastle.openpgp.operator.jcajce.JcaPGPContentSignerBuilder;
 import org.bouncycastle.openpgp.operator.jcajce.JcePBESecretKeyDecryptorBuilder;
@@ -22,8 +30,8 @@ import java.util.Date;
  * @author ngkx174@gmail.com
  *
  */
-public class PGPSignAndEncrypt {
-    public String signAndEncrypt(String message, PGPSecretKey pgpSecretKey, PGPPublicKey pgpPublicKey, String privateKeyPassphrase, int hashingAlgorithm, int compressionAlgorithm, int symmetricAlgorithm, String fileName, boolean withIntegrityCheck) throws Exception {
+public class PGPSignAndEncrypt extends PGP {
+    public String signAndEncrypt(String message, PGPSecretKey pgpSecretKey, PGPPublicKey pgpPublicKey, String privateKeyPassphrase, int hashingAlgorithm, int compressionAlgorithm, int symmetricAlgorithm, boolean withIntegrityCheck) throws Exception {
         // Define the security provider
         Security.addProvider(new BouncyCastleProvider());
 
@@ -57,7 +65,7 @@ public class PGPSignAndEncrypt {
         OutputStream zippedPacket = new PGPLiteralDataGenerator().open(
                 outPackets,
                 PGPLiteralData.BINARY, // BINARY | TEXT | UTF8
-                fileName,
+                filename,
                 message.length(),
                 new Date()
         );

@@ -14,11 +14,15 @@ import com.boomi.connector.api.PublicKeyStore;
 import com.boomi.connector.api.ResponseUtil;
 import com.boomi.connector.api.UpdateRequest;
 import com.boomi.connector.util.BaseUpdateOperation;
+import com.boomi.proserv.security.KeyUtils;
 import com.boomi.proserv.security.encrypting.JWEEncrypting;
 import com.boomi.proserv.security.encrypting.SMIMEEncrypting;
 import com.boomi.proserv.security.encrypting.X509Encrypting;
+import com.boomi.proserv.security.pgp.PGPKeyUtils;
+import com.boomi.proserv.security.pgp.PGPSigning;
 import com.boomi.proserv.security.signing.JWSSigning;
 import com.boomi.proserv.security.signing.X509Signing;
+import org.bouncycastle.openpgp.PGPSecretKey;
 
 /**
  * Execute the Operation, no profile need to be "imported" to the operation (as input are binaries)
@@ -36,7 +40,28 @@ public class BoomiDataSecurityExecuteOperation extends BaseUpdateOperation {
 		Logger logger = response.getLogger();
 		boolean log = getContext().getConnectionProperties().getBooleanProperty("logging");
 
-		log(logger, log, "ARA: executeUpdate received");
+		String customOperationType = getContext().getCustomOperationType();
+
+		if(customOperationType == null || customOperationType=="") {
+			customOperationType = "default";
+		}
+
+		switch (customOperationType) {
+			case "PGP":
+				executeUpdatePGP(request, response);
+				break;
+			case "default":
+			default:
+				executeUpdateStandard(request, response);
+				break;
+		}
+	}
+
+	protected void executeUpdateStandard(UpdateRequest request, OperationResponse response) {
+		Logger logger = response.getLogger();
+		boolean log = getContext().getConnectionProperties().getBooleanProperty("logging");
+
+		log(logger, log, "ARA: executeUpdateStandard received");
 
 		String action 						= getContext().getOperationProperties().getProperty("action");
 		String standard 					= getContext().getOperationProperties().getProperty("standard");
@@ -159,6 +184,65 @@ public class BoomiDataSecurityExecuteOperation extends BaseUpdateOperation {
 		}
 	}
 
+	protected void executeUpdatePGP(UpdateRequest request, OperationResponse response) {
+		Logger logger = response.getLogger();
+		boolean log = getContext().getConnectionProperties().getBooleanProperty("logging");
+
+		log(logger, log, "ARA: executeUpdatePGP received");
+
+		String action 					= getContext().getOperationProperties().getProperty("action");
+		String hashingAlgorithm 		= getContext().getOperationProperties().getProperty("hashingAlgorithm");
+		String compressionAlgorithm 	= getContext().getOperationProperties().getProperty("signingAlgorithm");
+		String symmetricKeyAlgorithm	= getContext().getOperationProperties().getProperty("symmetricKeyAlgorithm");
+		boolean applyIntegrityCheck		= getContext().getOperationProperties().getBooleanProperty("applyIntegrityCheck");
+
+		log(logger, log, "ARA: action is " + action + ", hashingAlgorithm is " + hashingAlgorithm
+				+ " compressionAlgorithm is " + compressionAlgorithm + " encryptingAlgorithm is " + symmetricKeyAlgorithm
+				+ " and applyIntegrityCheck is " + applyIntegrityCheck
+		);
+
+		for (ObjectData input : request) {
+			try {
+
+				log(logger, log, "ARA: Processing document ...");
+
+				String message = BoomiDataSecurityConnector.inputStreamToString(input.getData());
+				String result = "ERROR";
+
+				if (message != null) {
+					try {
+						switch (action) {
+							case "sign":
+								String keyPassphrase 	= input.getDynamicProperties().get("keyPassphrase");
+								String pgpPrivateKey 	= input.getDynamicProperties().get("pgpPrivateKey");
+								result = new PGPSigning().sign(message, PGPKeyUtils.getPGPPrivateKey(KeyUtils.stringToInputStream(pgpPrivateKey)), keyPassphrase, Integer.parseInt(hashingAlgorithm), Integer.parseInt(compressionAlgorithm));
+								break;
+							case "signAndEncrypt":
+								break;
+							case "validateSignature":
+								break;
+							case "encrypt":
+								break;
+							case "decrypt":
+								break;
+						}
+
+						response.addResult(input, OperationStatus.SUCCESS, "200", "OK", ResponseUtil.toPayload(result));
+					} catch (Exception e) {
+						logger.severe(e.getMessage());
+						e.printStackTrace();
+						throw e;
+					}
+
+				}
+
+				log(logger, log, "ARA: Document processed");
+			} catch (Exception e) {
+				logger.log(Level.SEVERE, "Details of Exception:", e);
+				ResponseUtil.addExceptionFailure(response, input, e);
+			}
+		}
+	}
 
 	private Certificate getCertificate(String keyAlias) throws Exception {
 		PublicKeyStore publickeyStore;

@@ -21,11 +21,11 @@ class PGPTest {
         String fileName             = "";
         String myKeyPassphrase      = "boomi123";
         String otherKeyPassphrase   = "companyxyz123";
-        String signature            = new PGPSigning().sign(message, TestSecurityHelper.getMyPGPPrivateKey(), myKeyPassphrase, hashingAlgorithm, compressionAlgorithm, fileName);
+        String signature            = new PGPSigning().sign(message, TestSecurityHelper.getMyPGPPrivateKey(), myKeyPassphrase, hashingAlgorithm, compressionAlgorithm);
         System.out.println("Generated signature: " + KeyUtils.encodeToBase64(signature.getBytes()));
         String encryptedSignature   = new PGPEncrypting().encrypt(message, TestSecurityHelper.getEntityPGPPublicKey(), symmetricKeyAlgorithm, withIntegrityCheck);
         System.out.println("Encrypted signature: " + encryptedSignature);
-        String encryptAndSignSig    = new PGPSignAndEncrypt().signAndEncrypt(message, TestSecurityHelper.getMyPGPPrivateKey(), TestSecurityHelper.getEntityPGPPublicKey(), myKeyPassphrase, hashingAlgorithm, compressionAlgorithm, symmetricKeyAlgorithm, fileName, withIntegrityCheck);
+        String encryptAndSignSig    = new PGPSignAndEncrypt().signAndEncrypt(message, TestSecurityHelper.getMyPGPPrivateKey(), TestSecurityHelper.getEntityPGPPublicKey(), myKeyPassphrase, hashingAlgorithm, compressionAlgorithm, symmetricKeyAlgorithm, withIntegrityCheck);
         System.out.println("Encrypt and sign signature: " + encryptAndSignSig);
         String decryptedMessage     = new PGPDecrypt().decrypt(TestSecurityHelper.getEntityPGPPrivateKey(), encryptAndSignSig, otherKeyPassphrase);
         System.out.println(decryptedMessage);

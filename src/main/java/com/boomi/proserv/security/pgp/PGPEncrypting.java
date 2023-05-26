@@ -2,7 +2,9 @@ package com.boomi.proserv.security.pgp;
 
 import org.bouncycastle.bcpg.ArmoredOutputStream;
 import org.bouncycastle.jce.provider.BouncyCastleProvider;
-import org.bouncycastle.openpgp.*;
+import org.bouncycastle.openpgp.PGPEncryptedDataGenerator;
+import org.bouncycastle.openpgp.PGPException;
+import org.bouncycastle.openpgp.PGPPublicKey;
 import org.bouncycastle.openpgp.operator.jcajce.JcePGPDataEncryptorBuilder;
 import org.bouncycastle.openpgp.operator.jcajce.JcePublicKeyKeyEncryptionMethodGenerator;
 
@@ -14,7 +16,7 @@ import java.security.SecureRandom;
  * @author ngkx174@gmail.com
  *
  */
-public class PGPEncrypting {
+public class PGPEncrypting extends PGP {
     public String encrypt(String message, PGPPublicKey pgpPublicKey, int symmetricAlgorithm, boolean withIntegrityCheck) throws IOException, PGPException {
         PGPEncryptedDataGenerator encryptor = new PGPEncryptedDataGenerator(
                 new JcePGPDataEncryptorBuilder(symmetricAlgorithm)

@@ -1,7 +1,14 @@
 package com.boomi.proserv.security.pgp;
 
 import org.bouncycastle.jce.provider.BouncyCastleProvider;
-import org.bouncycastle.openpgp.*;
+import org.bouncycastle.openpgp.PGPCompressedData;
+import org.bouncycastle.openpgp.PGPEncryptedDataList;
+import org.bouncycastle.openpgp.PGPException;
+import org.bouncycastle.openpgp.PGPObjectFactory;
+import org.bouncycastle.openpgp.PGPPrivateKey;
+import org.bouncycastle.openpgp.PGPPublicKeyEncryptedData;
+import org.bouncycastle.openpgp.PGPSecretKey;
+import org.bouncycastle.openpgp.PGPUtil;
 import org.bouncycastle.openpgp.operator.jcajce.JcaKeyFingerprintCalculator;
 import org.bouncycastle.openpgp.operator.jcajce.JcePBESecretKeyDecryptorBuilder;
 import org.bouncycastle.openpgp.operator.jcajce.JcePublicKeyDataDecryptorFactoryBuilder;
@@ -11,7 +18,7 @@ import java.io.*;
 import java.nio.charset.StandardCharsets;
 import java.security.Security;
 
-public class PGPDecrypt {
+public class PGPDecrypt extends PGP {
     public String decrypt(PGPSecretKey secretKey, String encryptedMessage, String privateKeyPassphrase) throws IOException, PGPException {
         // Add the security provider
         Security.addProvider(new BouncyCastleProvider());

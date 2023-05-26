@@ -10,7 +10,13 @@ import java.security.Security;
 import java.util.Date;
 
 // For Private Key extraction:
-import org.bouncycastle.openpgp.*;
+import org.bouncycastle.openpgp.PGPCompressedDataGenerator;
+import org.bouncycastle.openpgp.PGPLiteralData;
+import org.bouncycastle.openpgp.PGPLiteralDataGenerator;
+import org.bouncycastle.openpgp.PGPPrivateKey;
+import org.bouncycastle.openpgp.PGPSecretKey;
+import org.bouncycastle.openpgp.PGPSignature;
+import org.bouncycastle.openpgp.PGPSignatureGenerator;
 import org.bouncycastle.openpgp.operator.PBESecretKeyDecryptor;
 import org.bouncycastle.openpgp.operator.jcajce.JcaPGPContentSignerBuilder;
 import org.bouncycastle.openpgp.operator.jcajce.JcePBESecretKeyDecryptorBuilder;
@@ -20,8 +26,8 @@ import org.bouncycastle.openpgp.operator.jcajce.JcePBESecretKeyDecryptorBuilder;
  * @author ngkx174@gmail.com
  *
  */
-public class PGPSigning {
-    public String sign(String message, PGPSecretKey pgpSecretKey, String privateKeyPassphrase, int hashingAlgorithm, int compressionAlgorithm, String fileName) throws Exception {
+public class PGPSigning extends PGP {
+    public String sign(String message, PGPSecretKey pgpSecretKey, String privateKeyPassphrase, int hashingAlgorithm, int compressionAlgorithm) throws Exception {
         // Define the security provider
         Security.addProvider(new BouncyCastleProvider());
 
@@ -52,7 +58,7 @@ public class PGPSigning {
         OutputStream output = new PGPLiteralDataGenerator().open(
                 bcOut,
                 PGPLiteralData.BINARY, // BINARY | TEXT | UTF8
-                fileName,
+                filename,
                 message.length(),
                 new Date()
         );
