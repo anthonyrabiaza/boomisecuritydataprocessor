@@ -2,4 +2,5 @@
 <types>
 	<type>Get_Decrypt</type>
 	<type>Get_Encrypt</type>
+	<type>Execute_PKCE_Code_Verifier</type>
 </types>

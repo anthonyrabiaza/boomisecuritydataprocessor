@@ -57,7 +57,8 @@ public class TestSecurityHelper {
 		// Load private key from file
 		InputStream privateKeyringInputStream = new FileInputStream(filename);
 		// Get signing key
-		PGPSecretKey pgpSecretKey = PGPKeyUtils.getPGPPrivateKey(privateKeyringInputStream);
+		PGPSecretKey pgpSecretKey = null; //FIXME
+		//PGPSecretKey pgpSecretKey = PGPKeyUtils.getPGPPrivateKey(privateKeyringInputStream);
 		System.out.println(">Loaded");
 		return pgpSecretKey;
 	}
@@ -76,7 +77,8 @@ public class TestSecurityHelper {
 		// Load public key from file
 		InputStream publicKeyringInputStream = new FileInputStream(filename);
 		// Get public key
-		PGPPublicKey pgpPublicKey = PGPKeyUtils.getPGPPublicKey(publicKeyringInputStream);
+		PGPPublicKey pgpPublicKey = null;//FIXME
+		//PGPPublicKey pgpPublicKey = PGPKeyUtils.getPGPPublicKey(publicKeyringInputStream);
 		System.out.println(">Loaded");
 		return pgpPublicKey;
 	}

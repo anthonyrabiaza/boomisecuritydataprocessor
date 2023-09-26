@@ -20,6 +20,7 @@ import com.boomi.proserv.security.encrypting.SMIMEEncrypting;
 import com.boomi.proserv.security.encrypting.X509Encrypting;
 import com.boomi.proserv.security.pgp.PGPKeyUtils;
 import com.boomi.proserv.security.pgp.PGPSigning;
+import com.boomi.proserv.security.pkce.CodeGenerator;
 import com.boomi.proserv.security.signing.JWSSigning;
 import com.boomi.proserv.security.signing.X509Signing;
 import org.bouncycastle.openpgp.PGPSecretKey;
@@ -49,6 +50,12 @@ public class BoomiDataSecurityExecuteOperation extends BaseUpdateOperation {
 		switch (customOperationType) {
 			case "PGP":
 				executeUpdatePGP(request, response);
+				break;
+			case "PKCE_CODE_VERIFIER":
+				executeUpdatePKCECodeVerifier(request, response);
+				break;
+			case "PKCE_CODE_CHALLENGE":
+				executeUpdatePKCECodeChallenge(request, response);
 				break;
 			case "default":
 			default:
@@ -215,8 +222,9 @@ public class BoomiDataSecurityExecuteOperation extends BaseUpdateOperation {
 							case "sign":
 								String keyPassphrase 		= input.getDynamicProperties().get("keyPassphrase");
 								String pgpPrivateKeyContent = input.getDynamicProperties().get("pgpPrivateKey");
-								PGPSecretKey pgpPrivateKey 	= PGPKeyUtils.getPGPPrivateKey(KeyUtils.stringToInputStream(pgpPrivateKeyContent));
-								result = new PGPSigning().sign(message, pgpPrivateKey, keyPassphrase, Integer.parseInt(hashingAlgorithm), Integer.parseInt(compressionAlgorithm));
+								//PGPSecretKey pgpPrivateKey 	= PGPKeyUtils.getPGPPrivateKey(KeyUtils.stringToInputStream(pgpPrivateKeyContent));
+								result = null;
+								//result = new PGPSigning().sign(message, pgpPrivateKey, keyPassphrase, Integer.parseInt(hashingAlgorithm), Integer.parseInt(compressionAlgorithm));
 								break;
 							case "signAndEncrypt":
 								break;
@@ -227,6 +235,68 @@ public class BoomiDataSecurityExecuteOperation extends BaseUpdateOperation {
 							case "decrypt":
 								break;
 						}
+
+						response.addResult(input, OperationStatus.SUCCESS, "200", "OK", ResponseUtil.toPayload(result));
+					} catch (Exception e) {
+						logger.severe(e.getMessage());
+						e.printStackTrace();
+						throw e;
+					}
+
+				}
+
+				log(logger, log, "ARA: Document processed");
+			} catch (Exception e) {
+				logger.log(Level.SEVERE, "Details of Exception:", e);
+				ResponseUtil.addExceptionFailure(response, input, e);
+			}
+		}
+	}
+
+	protected void executeUpdatePKCECodeVerifier(UpdateRequest request, OperationResponse response) {
+		Logger logger = response.getLogger();
+		boolean log = getContext().getConnectionProperties().getBooleanProperty("logging");
+
+		log(logger, log, "ARA: executeUpdatePKCECodeVerifier received");
+
+		for (ObjectData input : request) {
+			try {
+				log(logger, log, "ARA: Processing document ...");
+
+				String result = "ERROR";
+
+				result = CodeGenerator.generateCodeVerifier();
+				response.addResult(input, OperationStatus.SUCCESS, "200", "OK", ResponseUtil.toPayload(result));
+
+				log(logger, log, "ARA: Document processed");
+			} catch (Exception e) {
+				logger.log(Level.SEVERE, "Details of Exception:", e);
+				ResponseUtil.addExceptionFailure(response, input, e);
+			}
+		}
+	}
+
+	protected void executeUpdatePKCECodeChallenge(UpdateRequest request, OperationResponse response) {
+		Logger logger = response.getLogger();
+		boolean log = getContext().getConnectionProperties().getBooleanProperty("logging");
+
+		log(logger, log, "ARA: executeUpdatePKCECodeChallenge received");
+
+		String algorithm 		= getContext().getOperationProperties().getProperty("algorithm");
+
+		log(logger, log, "ARA: algorithm is " + algorithm);
+
+		for (ObjectData input : request) {
+			try {
+
+				log(logger, log, "ARA: Processing document ...");
+
+				String message = BoomiDataSecurityConnector.inputStreamToString(input.getData());
+				String result = "ERROR";
+
+				if (message != null) {
+					try {
+						CodeGenerator.generateCodeChallenge(message, algorithm);
 
 						response.addResult(input, OperationStatus.SUCCESS, "200", "OK", ResponseUtil.toPayload(result));
 					} catch (Exception e) {

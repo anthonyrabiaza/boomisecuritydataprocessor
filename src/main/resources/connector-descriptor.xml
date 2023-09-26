@@ -282,6 +282,22 @@
         </field>
     </operation>
 
+    <operation types="EXECUTE" inputType="binary"
+               outputType="binary" customTypeId="PKCE_CODE_VERIFIER" customTypeLabel="Generate Code Verifier">
+    </operation>
+
+    <operation types="EXECUTE" inputType="binary"
+               outputType="binary" customTypeId="PKCE_CODE_CHALLENGE" customTypeLabel="Generate Code Challenge">
+
+        <field type="string" id="algorithm" label="Algorithm for code challenge">
+            <helpText>TODO</helpText>
+            <defaultValue>SHA-256</defaultValue>
+            <allowedValue label="MD5"><value>MD5</value></allowedValue>
+            <allowedValue label="SHA1"><value>SHA-1</value></allowedValue>
+            <allowedValue label="SHA256"><value>SHA-256</value></allowedValue>
+        </field>
+    </operation>
+
     <dynamicProperty type="string" id="signature" label="Signature"/>
 
     <dynamicProperty type="string" id="secret" label="Secret"/>
