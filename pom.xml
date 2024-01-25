@@ -75,7 +75,7 @@ xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xs
         <dependency>
             <groupId>org.bitbucket.b_c</groupId>
             <artifactId>jose4j</artifactId>
-            <version>0.7.2</version>
+            <version>0.9.4</version>
         </dependency>
         <dependency>
             <groupId>com.sun.mail</groupId>
