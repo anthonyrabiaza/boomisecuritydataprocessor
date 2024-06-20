@@ -6,7 +6,7 @@ xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xs
 
     <groupId>com.boomi.connector.datasecurity</groupId>
     <artifactId>boomisecuritydataprocessor</artifactId>
-    <version>0.40</version>
+    <version>1.40</version><!--Increase the number everytime before deploying-->
 
     <properties>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
@@ -14,7 +14,7 @@ xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xs
         <maven.compiler.target>1.8</maven.compiler.target>
         <maven.assembly.plugin.version>2.6</maven.assembly.plugin.version>
         <connector.sdk.version>2.8.2</connector.sdk.version>
-        <boomi.local.path>/home/ant/OneDrive/MyDev/lib/boomi</boomi.local.path>
+        <boomi.local.path>/Users/ant/Dev/lib/boomi</boomi.local.path><!--Change the location, but keep the change locally-->
     </properties>
 
     <repositories>
@@ -22,6 +22,10 @@ xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xs
             <id>boomisdk</id>
             <name>Connector SDK Repository</name>
             <url>https://boomisdk.s3.amazonaws.com/releases</url>
+        </repository>
+        <repository>
+            <id>central</id>
+            <url>https://repo.maven.apache.org/maven2</url>
         </repository>
     </repositories>
 
@@ -55,6 +59,11 @@ xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xs
                 <version>2.3.8</version>
                 <scope>provided</scope>
             </dependency>
+            <dependency>
+                <groupId>org.apache.commons</groupId>
+                <artifactId>commons-lang3</artifactId>
+                <version>3.12.0</version>
+            </dependency>
         </dependencies>
     </dependencyManagement>
 
@@ -75,13 +84,20 @@ xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xs
         <dependency>
             <groupId>org.bitbucket.b_c</groupId>
             <artifactId>jose4j</artifactId>
-            <version>0.7.2</version>
+            <version>0.9.3</version>
         </dependency>
         <dependency>
             <groupId>com.sun.mail</groupId>
             <artifactId>javax.mail</artifactId>
             <version>1.5.6</version>
             <scope>provided</scope>
+        </dependency>
+        <dependency>
+            <groupId>org.json</groupId>
+            <artifactId>json</artifactId>
+            <version>20131018</version> <!-- Use the latest version available -->
+            <scope>system</scope>
+            <systemPath>${boomi.local.path}/json.jar</systemPath>
         </dependency>
         <dependency>
             <groupId>org.bouncycastle</groupId>
@@ -132,6 +148,7 @@ xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xs
             <scope>system</scope>
             <systemPath>${boomi.local.path}/boomi-util.jar</systemPath>
         </dependency>
+
         <dependency>
             <groupId>net.markenwerk</groupId>
             <artifactId>utils-mail-smime</artifactId>
@@ -149,6 +166,32 @@ xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xs
             <artifactId>junit-jupiter-engine</artifactId>
             <version>5.7.0</version>
             <scope>test</scope>
+        </dependency>
+        <!-- https://mvnrepository.com/artifact/com.auth0/java-jwt -->
+        <dependency>
+            <groupId>org.apache.commons</groupId>
+            <artifactId>commons-lang3</artifactId>
+            <version>3.12.0</version>
+        </dependency>
+        <dependency>
+            <groupId>commons-codec</groupId>
+            <artifactId>commons-codec</artifactId>
+            <version>1.15</version> <!-- Adjust the version as needed -->
+        </dependency>
+        <dependency>
+            <groupId>com.nimbusds</groupId>
+            <artifactId>nimbus-jose-jwt</artifactId>
+            <version>9.31</version>
+        </dependency>
+        <dependency>
+            <groupId>com.nimbusds</groupId>
+            <artifactId>oauth2-oidc-sdk</artifactId>
+            <version>10.4</version>
+        </dependency>
+        <dependency>
+            <groupId>com.auth0</groupId>
+            <artifactId>java-jwt</artifactId>
+            <version>4.2.2</version>
         </dependency>
     </dependencies>
 
@@ -189,5 +232,4 @@ xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xs
             </plugin>
         </plugins>
     </build>
-
 </project>

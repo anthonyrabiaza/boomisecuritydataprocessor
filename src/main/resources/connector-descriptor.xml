@@ -283,19 +283,49 @@
     </operation>
 
     <operation types="EXECUTE" inputType="binary"
-               outputType="binary" customTypeId="PKCE_CODE_VERIFIER" customTypeLabel="Generate Code Verifier">
-    </operation>
-
-    <operation types="EXECUTE" inputType="binary"
-               outputType="binary" customTypeId="PKCE_CODE_CHALLENGE" customTypeLabel="Generate Code Challenge">
+               outputType="binary" customTypeId="PKCE_CODE_GENERATOR" customTypeLabel="EXECUTE PKCE CODE GENERATOR">
 
         <field type="string" id="algorithm" label="Algorithm for code challenge">
-            <helpText>TODO</helpText>
+            <helpText>Hash algorithm for code challenge</helpText>
             <defaultValue>SHA-256</defaultValue>
             <allowedValue label="MD5"><value>MD5</value></allowedValue>
             <allowedValue label="SHA1"><value>SHA-1</value></allowedValue>
             <allowedValue label="SHA256"><value>SHA-256</value></allowedValue>
         </field>
+    </operation>
+
+    <operation types="EXECUTE" inputType="binary"
+               outputType="binary" customTypeId="DPOP_GENERATOR" customTypeLabel="EXECUTE DPOP GENERATOR">
+
+        <field type="string" id="implementation" label="Library">
+            <helpText>Libraries available for  DPoP generation</helpText>
+            <defaultValue>NimbusJOSE</defaultValue>
+            <allowedValue label="NimbusJOSE"><value>NimbusJOSE</value></allowedValue>
+            <allowedValue label="JOSE4J"><value>JOSE4J</value></allowedValue>
+        </field>
+    </operation>
+
+    <operation types="EXECUTE" inputType="binary"
+               outputType="binary" customTypeId="CLIENT_ASSERTION_GENERATOR" customTypeLabel="EXECUTE CLIENT ASSERTION GENERATOR">
+    </operation>
+
+    <operation types="EXECUTE" inputType="binary"
+               outputType="binary" customTypeId="JWKS_GENERATOR" customTypeLabel="EXECUTE JWKS GENERATOR">
+    </operation>
+
+    <operation types="EXECUTE" inputType="binary"
+               outputType="binary" customTypeId="JWT_VERIFIER" customTypeLabel="EXECUTE JWT VERIFIER">
+    </operation>
+
+    <operation types="EXECUTE" inputType="binary"
+               outputType="binary" customTypeId="DECRYPT_DATA" customTypeLabel="EXECUTE DECRYPT DATA">
+    </operation>
+    <operation types="EXECUTE" inputType="binary"
+               outputType="binary" customTypeId="DECRYPT_SINGPASS_DATA" customTypeLabel="EXECUTE DECRYPT SINGPASS DATA">
+    </operation>
+
+    <operation types="EXECUTE" inputType="binary"
+               outputType="binary" customTypeId="JWKS_DATA" customTypeLabel="EXECUTE JWKS DATA">
     </operation>
 
     <dynamicProperty type="string" id="signature" label="Signature"/>

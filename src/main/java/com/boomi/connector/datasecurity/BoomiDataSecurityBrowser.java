@@ -28,24 +28,23 @@ public class BoomiDataSecurityBrowser extends BaseBrowser {
     }
 
 	@Override
-	public ObjectDefinitions getObjectDefinitions(String objectTypeId,
-			Collection<ObjectDefinitionRole> roles) {
+	public ObjectDefinitions getObjectDefinitions(String objectTypeId, Collection<ObjectDefinitionRole> roles) {
 		try {
-			URL url = this.getClass().getClassLoader().getResource(objectTypeId.toLowerCase() + ".xsd");
-			Document defDoc = parse(url.openStream());
 			ObjectDefinitions defs = new ObjectDefinitions();
-			ObjectDefinition def = new ObjectDefinition();
-			def.setSchema(defDoc.getDocumentElement());
-			def.setElementName(objectTypeId);
-			defs.getDefinitions().add(def);
+
+			if (objectTypeId.startsWith("Execute")) {
+				addDefinition(defs, objectTypeId, "Request");
+				addDefinition(defs, objectTypeId, "Response");
+			} else {
+				addDefinition(defs, objectTypeId, null);
+			}
 
 			return defs;
-
-		}
-		catch (Exception e) {
+		} catch (Exception e) {
 			throw new ConnectorException(e);
 		}
 	}
+
 
 	@Override
 	public ObjectTypes getObjectTypes() {
@@ -81,5 +80,20 @@ public class BoomiDataSecurityBrowser extends BaseBrowser {
 		finally {
 			IOUtil.closeQuietly(input);
 		}
+	}
+
+	private void addDefinition(ObjectDefinitions defs, String objectTypeId, String definitionType) throws Exception {
+		String resourcePath = objectTypeId;
+
+		if (definitionType != null) {
+			resourcePath = resourcePath + "_" + definitionType;
+		}
+
+		URL profileUrl = getClass().getClassLoader().getResource(resourcePath.toLowerCase() + ".xsd");
+		Document profileDoc = parse(profileUrl.openStream());
+		ObjectDefinition def = new ObjectDefinition();
+		def.setElementName(resourcePath);
+		def.setSchema(profileDoc.getDocumentElement());
+		defs.getDefinitions().add(def);
 	}
 }
